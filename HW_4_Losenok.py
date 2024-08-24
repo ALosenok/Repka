@@ -99,6 +99,7 @@ def shah(l, m, n, o, p):
     return answ
 
 
+
 print(f"Ответ пятой задачи {shah('h', 8, 'f', 7, 'конь')}")
 
 
