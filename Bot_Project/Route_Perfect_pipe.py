@@ -109,7 +109,7 @@ new_spacy_model = spacy.load(model_path)
 @task
 def db_connection():
 
-    conn = psycopg2.connect("dbname=travel_bot user=postgres password=AxelData0110# host=localhost client_encoding=UTF8") #DB connection
+    conn = psycopg2.connect("dbname=travel_bot user=postgres password=********* host=localhost client_encoding=UTF8") #DB connection
     cursor = conn.cursor()
 
     return conn, cursor
@@ -706,7 +706,7 @@ def find_time_in_road(coors: tuple, mode = 'foot-walking'):
     return: integer - minutes on a way
     '''
     mode = mode
-    client = openrouteservice.Client(key='5b3ce3597851110001cf624848f0ee4e7aef4801805e3e162cd3ac09') 
+    client = openrouteservice.Client(key='****************************************') 
     lat1, lng1, lat2, lng2 = coors
     lat1, lng1, lat2, lng2 = map(float, (lat1, lng1, lat2, lng2))
 
@@ -996,7 +996,7 @@ def pipeline_flow(input_data, activity_type = 'Culture', poi_rating = 4.0, poi_p
 
 # # Main function to run the bot
 # def main():
-#     bot_token = '8066163217:AAHssbh4hc4TZBSkVyZgVRZjcWvm7Vfvlpw'  # Replace with your bot token
+#     bot_token = '*******************************************'  # Replace with your bot token
 #     application = Application.builder().token(bot_token).build()
 
 #     conversation_handler = ConversationHandler(

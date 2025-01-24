@@ -98,7 +98,7 @@ def db_conn_detais(ti):
         'host': conn.info.host,
         'dbname': conn.info.dbname,
         'user': conn.info.user,
-        'password': 'AxelData0110#',  # Include password securely or in environment variable
+        'password': '******************', 
     }
 
     ti.xcom_push(key='db_connection_metadata', value=conn_metadata)
@@ -839,7 +839,7 @@ def find_time_in_road(coors: tuple):
 
     mode = Variable.get('move_mode', default_var = 'default_value')
     
-    client = openrouteservice.Client(key='5b3ce3597851110001cf624848f0ee4e7aef4801805e3e162cd3ac09') 
+    client = openrouteservice.Client(key='******************************************************') 
     lat1, lng1, lat2, lng2 = coors
     lat1, lng1, lat2, lng2 = map(float, (lat1, lng1, lat2, lng2))
 
