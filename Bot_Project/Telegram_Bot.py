@@ -52,7 +52,7 @@ async def cancel(update: Update, context: CallbackContext) -> int:
 
 # Main function to run the bot
 def main():
-    bot_token = '8066163217:AAHssbh4hc4TZBSkVyZgVRZjcWvm7Vfvlpw'  # Replace with your bot token
+    bot_token = '******************************' 
     application = Application.builder().token(bot_token).build()
 
     conversation_handler = ConversationHandler(
