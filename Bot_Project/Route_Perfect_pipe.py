@@ -89,11 +89,6 @@ def create_custom_city_matcher(nlp, name, cities):
     return custom_city_matcher
 
 
-# In[11]:
-
-
-# new_spacy_model = spacy.load("C:/Users/User/Desktop/Data_Science/Novo_Project/updated_spacy_model")
-
 
 # In[ ]:
 
@@ -108,8 +103,14 @@ new_spacy_model = spacy.load(model_path)
 # DB connector
 @task
 def db_connection():
+	
+    
+    db_host = os.getenv('DB_HOST')
+    db_name = os.getenv('DB_NAME')
+    db_user = os.getenv('DB_USER')
+    db_pass = os.getenv('DB_PASS')
 
-    conn = psycopg2.connect("dbname=travel_bot user=postgres password=********* host=localhost client_encoding=UTF8") #DB connection
+    conn = psycopg2.connect(database = db_name, user=db_user, password=db_pass, host=db_host, client_encoding='UTF8') #DB connection
     cursor = conn.cursor()
 
     return conn, cursor
@@ -542,7 +543,7 @@ def daily_small_poi(places, order, visited = [], rating = 0.0, n_poi = 3, v_time
                 small_poi[idx]= False
             else:
                 small_poi[idx] = res
-    print(small_poi)
+ 
     new_places = {}
     for idx, val in enumerate(order):
         new_places[idx - 1] = places[val]
@@ -706,7 +707,9 @@ def find_time_in_road(coors: tuple, mode = 'foot-walking'):
     return: integer - minutes on a way
     '''
     mode = mode
-    client = openrouteservice.Client(key='****************************************') 
+
+    open_route_key = os.getenv('OPEN_ROUTE_KEY')
+    client = openrouteservice.Client(key=open_route_key) 
     lat1, lng1, lat2, lng2 = coors
     lat1, lng1, lat2, lng2 = map(float, (lat1, lng1, lat2, lng2))
 
@@ -954,70 +957,5 @@ def pipeline_flow(input_data, activity_type = 'Culture', poi_rating = 4.0, poi_p
     return final_msg         
         
     
-
-
-# In[ ]:
-
-
-# nest_asyncio.apply()
-# executor = ThreadPoolExecutor()
-
-# START = 0
-
-
-# async def start(update: Update, context: CallbackContext) -> None:
-#     await update.message.reply_text('What city would you like to visit and for how long?')
-#     return START
-
-# async def handle_input(update: Update, context: CallbackContext) -> int:
-#     input_text = update.message.text
-#     await update.message.reply_text("Route generation is in process...")
-    
-#     messages = pipeline_flow(input_text)
-#     try:
-#         for msg in messages:
-#             print(f"Sending: {msg}")
-#             await update.message.reply_text(msg)
-#             await asyncio.sleep(1)
-    
-#         await update.message.reply_text("The route is done. You can start a new conversation with /start")
-
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         await update.message.reply_text("An error occurred. Please try again later with /start.")
-#         conn.rollback()
-#     # End the conversation
-#     return ConversationHandler.END
-
-# async def cancel(update: Update, context: CallbackContext) -> int:
-#     """Handle cancel command."""
-#     await update.message.reply_text("Conversation ended. You can start a new one anytime.")
-#     return ConversationHandler.END
-
-# # Main function to run the bot
-# def main():
-#     bot_token = '*******************************************'  # Replace with your bot token
-#     application = Application.builder().token(bot_token).build()
-
-#     conversation_handler = ConversationHandler(
-#             entry_points=[MessageHandler(filters.TEXT & ~filters.COMMAND, start)],
-#             states={
-#                 START: [MessageHandler(filters.TEXT & ~filters.COMMAND, handle_input)],
-#             },
-#             fallbacks=[CommandHandler("cancel", cancel)],
-#         )
-
-
-#     application.add_handler(conversation_handler)
-
-#     application.run_polling()
-
-# if __name__ == '__main__':
-#     main()
-
-
-# In[ ]:
-
-
 
 
