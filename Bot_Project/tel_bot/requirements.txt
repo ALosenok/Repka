@@ -1,0 +1,6 @@
+nest_asyncio
+concurrent.futures
+asyncio
+telegram
+telegram.ext
+requests
